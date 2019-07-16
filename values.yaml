@@ -1,0 +1,16 @@
+# Default values for wishlist.
+# This is a YAML_formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+wishlistImage:
+  repository: venkatnamburi/webapp
+  tag: "31"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  wishlistPortName: wishlist-port
+  wishlistPortValue: 8082
+  port: 8082

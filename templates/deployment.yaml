@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "wishlist.fullname" . }}
+  labels:
+    app: {{ template "wishlist.name" . }}
+    chart: {{ template "wishlist.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "wishlist.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "wishlist.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.wishlistImage.repository }}:{{ .Values.wishlistImage.tag }}"
+          imagePullPolicy: {{ .Values.wishlistImage.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.wishlistPortValue }}
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "{{ .Values.service.wishlistPortValue }}"
+        
