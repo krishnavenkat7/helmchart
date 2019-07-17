@@ -1,18 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample
+  name: {{ template "wishlist.fullname" . }}
   labels:
-    app: sample
+    app: {{ template "wishlist.name" . }}
+    chart: {{ template "wishlist.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: sample 
+      app: {{ template "wishlist.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: sample 
+        app: {{ template "wishlist.name" . }}
+        release: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
