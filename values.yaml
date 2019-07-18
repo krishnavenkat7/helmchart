@@ -12,5 +12,5 @@ wishlistImage:
 service:
   type: NodePort
   wishlistPortName: wishlist-port
-  wishlistPortValue: 8082
-  port: 8082
+  wishlistPortValue: 8080
+  port: 8080
